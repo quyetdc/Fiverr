@@ -40,6 +40,7 @@
               </div>
             <% end %>
 
+            <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: 'button is-primary is-fullwidth' %>
             <%= render "devise/shared/links" %>
 
           </div>

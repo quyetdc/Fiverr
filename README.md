@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Theme
+We use **Bulma** as CSS theme for this project
 
-Things you may want to cover:
+### Jquery
+We install `Jquery` by `yarn` and import it in `config/webpack/environment.js`
 
-* Ruby version
+### Notification
+We use `Noty` js library, installed by `yarn`
+ 
+JS file is required in `app/javascripts/packs/application.js`
 
-* System dependencies
+CSS files are imported in `app/assets/stylesheets/application.css` 
 
-* Configuration
+### User
+We use devise to manage user
+We use `omniauth` & `omniauth-facebook` for Facebook integration
 
-* Database creation
+**- Facebook**
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- On development mode, u can test with your own FB account only. If we want to test with more account, we need to add the account as *developer* or *tester* in Facebook app 
