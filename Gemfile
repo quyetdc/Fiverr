@@ -29,6 +29,8 @@ gem 'devise', '=4.6.1'
 gem 'omniauth', '=1.9.0'
 gem 'omniauth-facebook', '=5.0.0'
 
+gem "font-awesome-rails"
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
