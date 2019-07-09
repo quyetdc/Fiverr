@@ -97,11 +97,61 @@
               <div class="card-content">
 
                 <!-- About -->
-                <article></article>
+                <article>
+                  <div class="media">
+                    <div class="media-content">
+                      <p>
+                        <strong>About yourself</strong>
+                      </p>
+                      <br/>
+                      <%= current_user.about %>
+                    </div>
+
+                    <div class="media-right">
+                      <i class="toggle fa fa-edit" aria-controls="user-about"></i>
+                    </div>
+                  </div>
+
+                  <div class="content">
+                    <%= form_for :user, url: users_edit_url(current_user), action: :update, method: :post, html: {id: 'user-about', class: 'is-hidden'} do |f| %>
+                      <div class="field">
+                        <%= f.text_area :about, autofocus: true, autocomplete: 'form', class: 'input' %>
+                      </div>
+
+                      <a class="toggle button is-light" aria-controls="user-about">Cancel</a>
+                      <%= f.submit "Save", class: "button is-danger" %>
+                    <% end %>
+                  </div>
+                </article>
                 <hr class="h-10">
 
                 <!-- Languages -->
-                <article></article>
+                <article>
+                  <div class="media">
+                    <div class="media-content">
+                      <p>
+                        <strong>Language</strong>
+                      </p>
+                      <br/>
+                      <%= current_user.language %>
+                    </div>
+
+                    <div class="media-right">
+                      <i class="toggle fa fa-edit" aria-controls="user-language"></i>
+                    </div>
+                  </div>
+
+                  <div class="content">
+                    <%= form_for :user, url: users_edit_url(current_user), action: :update, method: :post, html: {id: 'user-language', class: 'is-hidden'} do |f| %>
+                      <div class="field">
+                        <%= f.text_area :language, autofocus: true, autocomplete: 'form', class: 'input' %>
+                      </div>
+
+                      <a class="toggle button is-light" aria-controls="user-language">Cancel</a>
+                      <%= f.submit "Save", class: "button is-danger" %>
+                    <% end %>
+                  </div>
+                </article>
                 <hr class="h-10">
 
                 <!-- Linked Account -->

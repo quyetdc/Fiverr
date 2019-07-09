@@ -1,5 +1,8 @@
-$(document).ready(function() {
-  $('.toggle').click(function(){
-    $("#" + $(event.target).attr('aria-controls') ).toggleClass('is-hidden');
+$(document).ready(() => {
+  $('.toggle').click((e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    $("#" + $(e.target).attr('aria-controls') ).toggleClass('is-hidden');
   })
 });
