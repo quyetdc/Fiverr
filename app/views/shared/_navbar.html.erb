@@ -38,7 +38,13 @@
 
       <% if user_signed_in? %>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-item"><%= current_user.full_name %></a>
+          <a class="navbar-link">
+            <figure class="image is-24x24">
+              <%= image_tag avatar_url(current_user), class: "is-rounded" %>
+            </figure>
+            &nbsp;<%= current_user.full_name %>
+          </a>
+
           <div class="navbar-dropdown">
             <%= link_to "Profile", edit_user_registration_path, class: 'navbar-item' %>
             <a href="#" class="navbar-item">Dashboard</a>
@@ -58,7 +64,7 @@
   </div>
 </nav>
 
-<nav class="navbar has-shadow">
+<nav class="navbar has-shadow" style="z-index: 5;">
   <div class="container">
     <div class="navbar">
 
