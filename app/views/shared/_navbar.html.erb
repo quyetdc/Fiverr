@@ -1,7 +1,7 @@
 <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-      <h1 class="title is-4">Freelancer</h1>
+      <h1 class="title is-4">Fiverr</h1>
     </a>
 
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -46,7 +46,7 @@
           </a>
 
           <div class="navbar-dropdown">
-            <%= link_to "Profile", edit_user_registration_path, class: 'navbar-item' %>
+            <%= link_to "Profile", user_path(current_user), class: 'navbar-item' %>
             <a href="#" class="navbar-item">Dashboard</a>
             <hr class="navbar-divider">
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'navbar-item' %>
@@ -76,7 +76,7 @@
         </a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item">Create New Gig</a>
+          <%= link_to 'Create New Gig', new_gig_path, class: 'navbar-item' %>
         </div>
       </div>
 

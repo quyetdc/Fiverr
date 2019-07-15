@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'gigs/update'
   get 'gigs/show'
   get 'dashboard', to: "users#dashboard" #, as: :dashboard
-  get '/users/:id', to: "users#show"
+  get '/users/:id', to: "users#show", as: :user
 
   post "users/edit", to: "users#update"
 

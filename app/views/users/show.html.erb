@@ -21,7 +21,12 @@
 
                 <!-- Upload Button -->
                 <div class="content has-text-centered">
-                  <p class="title is-5"><%= @user.full_name %></p>
+                  <p class="title is-5">
+                    <%= @user.full_name %>
+                    <%= link_to edit_user_registration_path do %>
+                      <i class="fa fa-pencil is-size-7" style="margin-left: 5px;"></i>
+                    <% end %>
+                  </p>
                 </div>
                 <hr class="h-10">
 

@@ -30,6 +30,7 @@ gem 'omniauth', '=1.9.0'
 gem 'omniauth-facebook', '=5.0.0'
 
 gem "font-awesome-rails"
+gem 'faker', '=1.9.3'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
