@@ -17,7 +17,14 @@ Rails.application.routes.draw do
   get 'pages/home'
 
   root to: "users#dashboard"
-  resources :gigs
+
+  resources :gigs do
+    member do
+      delete :delete_photo
+      post :upload_photo
+    end
+  end
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

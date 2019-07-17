@@ -1,5 +1,14 @@
 # README
 
+### Features
+- Users with `devise`
+- Facebook oauth
+- Flash messages as notification using `noty` js
+- Files uploads using `active storage`
+- Gigs management
+- Gigs creation with `Bulma` multi steps
+- File drag & drop using `dropzone` 
+
 ### Theme
 We use **Bulma** as CSS theme for this project
 
@@ -20,4 +29,11 @@ We use `omniauth` & `omniauth-facebook` for Facebook integration. We will need t
 **- Facebook**
 
 - On development mode, u can test with your own FB account only. If we want to test with more account, we need to add the account as *developer* or *tester* in Facebook app 
+
+**- Avatar**
+- We use `active storage` to proceed user's avatar
+
+### Gig
+- We use `active storage` to proceed gig's photos
+- We use `action text` to proceed gig's description
 

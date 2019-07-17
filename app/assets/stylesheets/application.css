@@ -19,3 +19,5 @@
 @import "bulma-extensions";
 @import "noty/lib/noty";
 @import "noty/lib/themes/sunset";
+@import "dropzone/dist/basic.css";
+@import "dropzone/dist/dropzone.css";
