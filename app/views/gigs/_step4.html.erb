@@ -1,0 +1,25 @@
+<div class="step-content <%= 'is-active' if @step == 4 %>">
+  <div class="field">
+    <label class="label">
+      Youtube Code
+    </label>
+    <%= f.text_field :video, autocomplete: "Video url", class: "input" %>
+  </div>
+
+  <div class="field">
+    <label class="label">
+      Build your Gig Gallery
+    </label>
+
+    <div class="control">
+      <div class="m-b-20">
+          <!--  Photo drop zone here -->
+      </div>
+
+      <div class="columns is-multiline" style="width: 100%">
+        <!--  Photo upload here -->
+
+      </div>
+    </div>
+  </div>
+</div>
