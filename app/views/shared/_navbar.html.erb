@@ -33,7 +33,7 @@
     </div>
 
     <div class="navbar-end">
-      <a href="#" class="navbar-item">Post Gig</a>
+      <%= link_to "Post Gig", new_gig_path, class: 'navbar-item' %>
       <a href="#" class="navbar-item">Browse Gigs</a>
 
       <% if user_signed_in? %>

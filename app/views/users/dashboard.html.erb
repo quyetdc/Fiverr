@@ -187,11 +187,64 @@
         <div class="columns is-multiline">
 
           <!-- Create New Gig -->
-          <div class="column is-one-third has-text-centered"></div>
+          <div class="column is-one-third has-text-centered">
+            <%= link_to new_gig_path do %>
+              <div class="card">
+
+                <div class="card-image card-content is-horizontal-center is-flex ">
+                  <figure class="image is-128x128 ">
+                    <%= image_tag 'icon_add.png' %>
+                  </figure>
+                </div>
+
+                <div class="card-content">
+                  <strong>Create a new gig</strong>
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+
+
 
           <!-- Sample Gig -->
-          <div class="column is-one-third has-text-centered"></div>
+          <% current_user.gigs.each do |gig| %>
+            <div class="column is-one-third">
+              <div class="card">
 
+                <div class="card-image">
+                  <%= link_to edit_gig_path(gig) do %>
+                    <figure class="image is-4by3">
+                      <%= image_tag gig_cover(gig) %>
+                    </figure>
+                  <% end %>
+                </div>
+
+                <div class="card-content p-t-5 p-b-5">
+                  <p class="subtitle is-6 m-b-5">
+                    <%= link_to gig.title, gig_path(gig) %>
+                  </p>
+                  <span class="star-review"><i class="fa fa-star"></i>
+                    4.8 <span class="has-text-primary">(23)</span>
+                  </span>
+                </div>
+
+                <% pricing = basic_pricing gig %>
+                <footer class="card-footer">
+                  <a class="has-text-danger is-block card-footer-item has-text-right">
+
+                    <% if pricing %>
+                      <span class="small-title">STARTING AT</span>
+                      <strong>$<%= pricing.price %></strong>
+                    <% else %>
+                      <span class="small-title has-text-dark">NO PRICING YET</span>
+                    <% end %>
+                  </a>
+                </footer>
+
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
 

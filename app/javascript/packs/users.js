@@ -1,4 +1,4 @@
-$(document).ready(() => {
+$(document).on('turbolinks: load', () => {
   $('.toggle').click((e) => {
     e.stopPropagation();
     e.preventDefault();
