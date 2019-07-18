@@ -11,6 +11,7 @@ require('packs/users.js');
 
 window.Noty = require('noty');
 window.Dropzone = require('dropzone');
+window.BulmaCarousel = require('bulma-extensions/bulma-carousel/dist/js/bulma-carousel');
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
