@@ -1,4 +1,4 @@
-<div class="step-content <%= 'is-active' if @step == 5 %>">
+<div class="step-content <%= 'is-active' if @step == 5 %> has-text-centered">
   <div>
     <%= hidden_field_tag 'active', 'true' if @step == 5 %>
     <strong class="is-size-2">Almost there ...</strong>
@@ -6,7 +6,7 @@
   </div>
 </div>
 
-<div class="field is-grouped is-grouped-centeredm m-t-25">
+<div class="field is-grouped is-grouped-centered m-t-25">
   <p class="control <%= 'is-hidden' if @step == 1 %>">
     <%= link_to 'Back', edit_gig_path(@gig, step: @step - 1), class: "button is-light" %>
   </p>
@@ -17,7 +17,8 @@
     <% else %>
       <%= link_to "Publish", gig_path(@gig.id, gig: {active: true}, step: @step),
                   method: :put,
-                  data: {confirm: "Do you want to publish this gig?"} %>
+                  data: {confirm: "Do you want to publish this gig?"} ,
+                  class: 'button is-primary'%>
     <% end %>
   </p>
 </div>
