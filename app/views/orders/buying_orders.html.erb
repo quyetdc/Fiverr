@@ -1,0 +1,46 @@
+<section class="section">
+  <div class="container">
+    <p class="title">Manage Buying Orders</p>
+
+    <table class="table is-fullwidth">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Seller Name</th>
+        <th>Title</th>
+        <th>Due Date</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% if @orders.blank? %>
+        <tr>
+          <td colspan="7" class="has-text-centered"><h3>Nothing to show</h3></td>
+        </tr>
+      <% end %>
+
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.created_at.strftime('%d %b %Y') %></td>
+          <td><%= order.seller_name %></td>
+          <td><%= link_to order.title, gig_path(order.gig) %></td>
+          <td><%= order.due_date.strftime('%d %b %Y') %></td>
+          <td>$<%= order.amount %></td>
+          <td>
+              <span class="tag <%= 'is-warning' if order.inprogress? %> <%= 'is-success' if order.completed? %>">
+                <%= order.status.capitalize %>
+              </span>
+
+          </td>
+          <td>
+            <%= link_to "Mark Complete", complete_order_path(order), class: "button is-small is-primary #{'is-hidden' if @order.completed?}", method: :put %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

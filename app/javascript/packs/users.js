@@ -1,5 +1,9 @@
+
 $(document).on('turbolinks: load', () => {
-  $('.toggle').click((e) => {
+  $('.toggle').on("click", (e) => {
+
+    console.log('Toggle class clicked');
+
     e.stopPropagation();
     e.preventDefault();
 

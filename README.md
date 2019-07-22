@@ -37,3 +37,6 @@ We use `omniauth` & `omniauth-facebook` for Facebook integration. We will need t
 - We use `active storage` to proceed gig's photos
 - We use `action text` to proceed gig's description
 
+### Order
+- We use `PgcryptoExtension` to enable orders' `id` as `uuid`. Check the `EnablePgcryptoExtension` migration
+
