@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-  get 'gigs/new'
-  get 'gigs/create'
-  get 'gigs/edit'
-  get 'gigs/update'
-  get 'gigs/show'
+
   get 'dashboard', to: "users#dashboard" #, as: :dashboard
   get '/users/:id', to: "users#show", as: :user
 
   get '/selling_orders', to: "orders#selling_orders"
   get '/buying_orders', to: "orders#buying_orders"
+
+  get '/all-requests', to: "requests#list"
 
   post "users/edit", to: "users#update"
 
@@ -32,6 +30,8 @@ Rails.application.routes.draw do
 
     resources :orders, only: [:create] # POST gigs/:gig_id/orders
   end
+
+  resources :requests
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
