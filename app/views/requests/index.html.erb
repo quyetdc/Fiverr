@@ -1,2 +1,51 @@
-<h1>Requests#index</h1>
-<p>Find me in app/views/requests/index.html.erb</p>
+<section class="section">
+  <div class="container">
+    <p class="title">
+      Manage requests
+      <%= link_to "Post new request", new_request_path, class: "button is-primary is-pulled-right" %>
+    </p>
+
+    <table class="table is-fullwidth">
+      <thead class="is-centered">
+      <tr>
+        <td>Date</td>
+        <td>Request</td>
+        <td class="has-text-right">Offers</td>
+        <td class="has-text-right">Action</td>
+      </tr>
+      </thead>
+
+      <tbody>
+        <% if @requests.blank? %>
+          <tr>
+            <td colspan="4" class="has-text-centered"><h2>Nothing to show here</h2></td>
+          </tr>
+        <% else %>
+
+          <% @requests.each do |r| %>
+            <tr>
+              <td><%= r.created_at.strftime("%d, %b %Y") %></td>
+              <td><%= link_to r.title, requests_path(r) %></td>
+              <td class="has-text-right">3</td>
+              <td class="has-text-right">
+                <%= link_to edit_request_path(r), class: "m-r-5" do %>
+                  <span class="icon has-text-success">
+                    <i class="fa fa-edit fa-lg"></i>
+                  </span>
+                <% end %>
+
+                <%= link_to r, method: :delete, data: { confirm: "Are you sure?" } do %>
+                  <span class="icon has-text-danger">
+                    <i class="fa fa-trash fa-lg"></i>
+                  </span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</section>
