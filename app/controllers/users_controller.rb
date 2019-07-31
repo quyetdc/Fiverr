@@ -2,6 +2,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def dashboard
+    if params[:category]
+      @gigs = current_user.gigs.joins(:category).where(categories: { name: params[:category] }).all
+    else
+      @gigs = current_user.gigs
+    end
+
   end
 
   def show
