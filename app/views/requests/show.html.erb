@@ -17,7 +17,7 @@
                     Posted on: <%= @request.created_at.strftime('%d, %b %Y') %>
                   </span>
                 </p>
-                Need to be delivered in: <%= @request.delivery %> days | Offers: 0 | Buget: $<%= @request.budget %>
+                Need to be delivered in: <%= @request.delivery %> days | Offers: <%= @request.offers.size %> | Buget: $<%= @request.budget %>
               </div>
             </article>
           </div>
@@ -114,7 +114,30 @@
 
       <!-- RIGHT SIDE -->
       <div class="column">
+        <div class="card">
+          <%= form_for Offer.new do |f| %>
+            <div class="card-content">
+              <%= f.hidden_field :request_id, value: @request.id %>
 
+              <div class="field">
+                <label class="label">Amount ($)</label>
+                <%= f.text_field :amount, class: "input" %>
+              </div>
+
+              <div class="field">
+                <label class="label">Delivery in (days)</label>
+                <%= f.text_field :days, class: "input" %>
+              </div>
+
+              <div class="field">
+                <label class="label">Offer note</label>
+                <%= f.text_area :note, class: "textarea" %>
+              </div>
+
+              <%= f.submit 'Send Offer', class: "button is-primary is-fullwidth" %>
+            </div>
+          <% end %>
+        </div>
       </div>
 
     </div>

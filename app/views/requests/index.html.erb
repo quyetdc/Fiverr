@@ -26,7 +26,9 @@
             <tr>
               <td><%= r.created_at.strftime("%d, %b %Y") %></td>
               <td><%= link_to r.title, requests_path(r) %></td>
-              <td class="has-text-right">3</td>
+              <td class="has-text-right">
+                <%= link_to r.offers.size, request_offers_path(r) %>
+              </td>
               <td class="has-text-right">
                 <%= link_to edit_request_path(r), class: "m-r-5" do %>
                   <span class="icon has-text-success">
