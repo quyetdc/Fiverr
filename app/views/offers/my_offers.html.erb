@@ -1,0 +1,45 @@
+<section class="section">
+  <div class="container">
+    <p class="title">My Offers</p>
+    <table class="table is-fullwidth">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Request Title</th>
+        <th>Budget</th>
+        <th>Amount</th>
+        <th>Deliver in</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if @offers.blank? %>
+        <tr>
+          <td colspan="6" class="has-text-centered">Nothing to show here</td>
+        </tr>
+      <% end %>
+
+      <% @offers.each do |offer| %>
+        <tr>
+          <td><%= offer.created_at.strftime("%d, %b %Y") %></td>
+          <td>
+            <%= link_to offer.request.title, request_path(offer.request) %>
+          </td>
+          <td>$<%= offer.request.budget %></td>
+          <td>$<%= offer.amount %></td>
+          <td><%= pluralize(offer.days, 'day') %></td>
+          <td>
+            <span class="tag <%= 'is-warning' if offer.pending? %>
+                             <%= 'is-success' if offer.accepted? %>
+                             <%= 'is-danger' if offer.rejected? %>">
+
+              <%= offer.status.capitalize %>
+            </span>
+          </td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+  </div>
+</section>
