@@ -26,7 +26,10 @@
         <tr>
           <td><%= order.created_at.strftime('%d %b %Y') %></td>
           <td><%= order.seller_name %></td>
-          <td><%= link_to order.title, gig_path(order.gig) %></td>
+          <td>
+            <%= link_to order.title, gig_path(order.gig) if order.gig.present? %>
+            <%= link_to order.title, request_path(order.request) if order.request.present? %>
+          </td>
           <td><%= order.due_date.strftime('%d %b %Y') %></td>
           <td>$<%= order.amount %></td>
           <td>
@@ -36,7 +39,7 @@
 
           </td>
           <td>
-            <%= link_to "Mark Complete", complete_order_path(order), class: "button is-small is-primary #{'is-hidden' if @order.completed?}", method: :put %>
+            <%= link_to "Mark Complete", complete_order_path(order), class: "button is-small is-primary #{'is-hidden' if order.completed?}", method: :put %>
           </td>
         </tr>
       <% end %>

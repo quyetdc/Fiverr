@@ -25,7 +25,10 @@
         <tr>
           <td><%= order.created_at.strftime('%d %b %Y') %></td>
           <td><%= order.buyer_name %></td>
-          <td><%= link_to order.title, gig_path(order.gig) %></td>
+          <td>
+            <%= link_to order.title, gig_path(order.gig) if order.gig.present? %>
+            <%= link_to order.title, request_path(order.request) if order.request.present? %>
+          </td>
           <td><%= order.due_date.strftime('%d %b %Y') %></td>
           <td>$<%= order.amount %></td>
           <td>

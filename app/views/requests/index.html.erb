@@ -25,7 +25,7 @@
           <% @requests.each do |r| %>
             <tr>
               <td><%= r.created_at.strftime("%d, %b %Y") %></td>
-              <td><%= link_to r.title, requests_path(r) %></td>
+              <td><%= link_to r.title, request_offers_path(r) %></td>
               <td class="has-text-right">
                 <%= link_to r.offers.size, request_offers_path(r) %>
               </td>

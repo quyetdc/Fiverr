@@ -11,9 +11,11 @@ Rails.application.routes.draw do
   get '/my_offers', to: "offers#my_offers"
 
   post "users/edit", to: "users#update"
-  post "/offers", to: "offers#create"
-
   put '/orders/:id/complete',  to: "orders#complete", as: 'complete_order'
+
+  post "/offers", to: "offers#create"
+  put '/offers/:id/accept', to: 'offers#accept', as: :accept_offer
+  put '/offers/:id/reject', to: 'offers#reject', as: :reject_offer
 
   devise_for :users,
              path: '',

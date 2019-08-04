@@ -31,10 +31,34 @@
             <td><%= offer.note %></td>
             <td>$<%= offer.amount %></td>
             <td><%= offer.days %></td>
-            <td><%= offer.status.capitalize %></td>
+
             <td>
-              <%= link_to "Accept", nil, class: "button is-small is-success" %>
-              <%= link_to "Reject", nil, class: "button is-small is-danger" %>
+              <span class="tag <%= 'is-warning' if offer.pending? %>
+                               <%= 'is-success' if offer.accepted? %>
+                               <%= 'is-danger' if offer.rejected? %>">
+
+                <%= offer.status.capitalize %>
+              </span>
+            </td>
+
+            <td>
+              <%= link_to accept_offer_path(offer),
+                          method: :put,
+                          data: { confirm: "Are you sure" },
+                          class: "button is-small is-primary is-outlined #{ 'is-hidden' if !offer.pending? }" do %>
+
+                <span class="icon"><i class="fa fa-check-circle fa-lg"></i></span>
+                <span>Accept</span>
+              <% end %>
+
+              <%= link_to reject_offer_path(offer),
+                          method: :put,
+                          data: { confirm: "Are you sure" },
+                          class: "button is-small is-danger is-outlined #{ 'is-hidden' if !offer.pending? }" do %>
+
+                <span class="icon"><i class="fa fa-times-circle fa-lg"></i></span>
+                <span>Accept</span>
+              <% end %>
             </td>
           </tr>
         <% end %>
