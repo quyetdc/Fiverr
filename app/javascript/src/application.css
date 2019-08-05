@@ -1,0 +1,8 @@
+@import 'bulma/css/bulma.css';
+@import "bulma-extensions";
+@import "bulma-extensions/bulma-carousel/dist/css/bulma-carousel.min";
+
+@import "noty/lib/noty";
+@import "noty/lib/themes/sunset";
+@import "dropzone/dist/basic.css";
+@import "dropzone/dist/dropzone.css";

@@ -40,3 +40,9 @@ We use `omniauth` & `omniauth-facebook` for Facebook integration. We will need t
 ### Order
 - We use `PgcryptoExtension` to enable orders' `id` as `uuid`. Check the `EnablePgcryptoExtension` migration
 
+## Troubleshooting
+
+#### Heroku
+
+Install bulma - instead of using Gem We should add it via yarn `yarn add bulma`, and import our css into `app/javascript/packs/src/application.css`
+Of course, we need to import the template css file into our `packs/application.js`

@@ -21,9 +21,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
-
-gem 'bulma-rails', '~> 0.7.4'
-gem 'bulma-extensions-rails', '~> 1.0.30'
 gem 'devise', '=4.6.1'
 
 gem 'omniauth', '=1.9.0'
