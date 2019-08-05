@@ -46,3 +46,10 @@ We use `omniauth` & `omniauth-facebook` for Facebook integration. We will need t
 
 Install bulma - instead of using Gem We should add it via yarn `yarn add bulma`, and import our css into `app/javascript/packs/src/application.css`
 Of course, we need to import the template css file into our `packs/application.js`
+
+Optional build-pack commands
+
+```cassandraql
+heroku buildpacks:set heroku/nodejs
+heroku buildpacks:set heroku/ruby --index 2
+```
