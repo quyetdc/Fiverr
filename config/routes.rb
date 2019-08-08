@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   put '/offers/:id/accept', to: 'offers#accept', as: :accept_offer
   put '/offers/:id/reject', to: 'offers#reject', as: :reject_offer
 
+  post '/reviews', to: 'reviews#create'
+
   devise_for :users,
              path: '',
              path_names: { sign_up: 'register', sign_in: 'login', edit: 'profile', sign_out: 'logout' },
