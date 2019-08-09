@@ -9,6 +9,7 @@ require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
 require('packs/users.js');
+require('raty-js');
 
 window.Noty = require('noty');
 window.Dropzone = require('dropzone');
