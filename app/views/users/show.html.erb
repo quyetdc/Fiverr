@@ -117,6 +117,50 @@
 
       <!-- RIGHT SIDE -->
       <div class="column">
+        <div class="columns is-multiline">
+          <!-- Sample Gig -->
+          <% @user.gigs.each do |gig| %>
+            <div class="column is-one-third">
+              <div class="card">
+
+                <div class="card-image">
+                  <%= link_to edit_gig_path(gig) do %>
+                    <figure class="image is-4by3">
+                      <%= image_tag gig_cover(gig) %>
+                    </figure>
+                  <% end %>
+                </div>
+
+                <div class="card-content p-t-5 p-b-5">
+                  <p class="subtitle is-6 m-b-5">
+                    <%= link_to gig.title, gig_path(gig) %>
+                  </p>
+                  <span class="star-review">
+                      <i class="fa fa-star"></i>
+                    <%= gig.average_rating %>
+
+                    <span class="has-text-primary">(<%= gig.reviews.count %>)</span>
+                    </span>
+                </div>
+
+                <% pricing = basic_pricing gig %>
+                <footer class="card-footer">
+                  <a class="has-text-danger is-block card-footer-item has-text-right">
+
+                    <% if pricing %>
+                      <span class="small-title">STARTING AT</span>
+                      <strong>$<%= pricing.price %></strong>
+                    <% else %>
+                      <span class="small-title has-text-dark">NO PRICING YET</span>
+                    <% end %>
+                  </a>
+                </footer>
+
+              </div>
+            </div>
+          <% end %>
+        </div>
+
         <div class="card">
           <div class="card-header">
             <div class="card-header-title"> Latest Reviews </div>
@@ -124,30 +168,32 @@
 
           <div class="card-content">
             <!-- Sample Reviews -->
-            <article class="media">
-              <figure class="media-left">
-                <p class="image is-64x64">
-                  <%= image_tag avatar_url(@user), class: 'is-rounded' %>
-                </p>
-              </figure>
-              <div class="media-content">
-                <div class="content">
-                  <p>
-                    <strong>John Smith</strong><br/>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam atque blanditiis, consectetur consequuntur corporis dolorem esse eum excepturi explicabo incidunt ipsam laudantium nesciunt praesentium provident similique tempora vel vero voluptate.
+            <% @reviews.each do |review| %>
+              <article class="media">
+                <figure class="media-left">
+                  <p class="image is-64x64">
+                    <%= image_tag avatar_url(review.buyer), class: 'is-rounded' %>
                   </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong><%= review.buyer.full_name %></strong><br/>
+                      <%= review.review %>
+                    </p>
 
-                  <small>31 minutes ago</small>
+                    <small><%= time_ago_in_words(review.created_at) %></small>
+                  </div>
                 </div>
-              </div>
 
-              <div class="media-right">
+                <div class="media-right">
                 <span class="star-review">
-                  <i class="fa fa-star"> 5.0</i>
+                  <i class="fa fa-star"> <%= review.stars %></i>
                 </span>
-              </div>
+                </div>
+              </article>
+            <% end %>
 
-            </article>
           </div>
         </div>
       </div>

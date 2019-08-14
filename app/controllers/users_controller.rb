@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @reviews = Review.where(seller_id: params[:id]).order(created_at: :asc)
   end
 
   def update
