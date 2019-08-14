@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'request_offers/:id', to: "requests#offers", as: 'request_offers'
   get '/my_offers', to: "offers#my_offers"
 
+  get '/search', to: "pages#search"
+
   post "users/edit", to: "users#update"
   put '/orders/:id/complete',  to: "orders#complete", as: 'complete_order'
 
