@@ -38,49 +38,58 @@
             <div class="card">
               <div class="card-content">
 
-                <!-- Title Search -->
-                <div class="field">
-                  <input class="input" type="text" placeholder="Search by title">
-                </div>
-                <hr/>
+                <%= form_tag '', method: :get do %>
 
-                <!-- Price Range -->
-                <label class="label">Price Range</label>
-                <div class="field has-addons">
-                  <p class="control">
-                    <a class="button is-static">$</a>
-                  </p>
-                  <p class="control">
-                    <input class="input" type="text" placeholder="Min">
-                  </p>
-                </div>
-                <div class="field has-addons">
-                  <p class="control">
-                    <a class="button is-static">$</a>
-                  </p>
-                  <p class="control">
-                    <input class="input" type="text" placeholder="Max">
-                  </p>
-                </div>
-                <hr/>
+                  <%= hidden_field_tag 'category', @category ? @category.id : '' %>
 
-                <!-- Delivery Time -->
-                <label class="label">Delivery Time</label>
-                <%= radio_button_tag 'delivery', "1", checked = "1" == @delivery %> Up to 1 days <br>
-                <%= radio_button_tag 'delivery', "3", checked = "3" == @delivery %> Up to 3 days <br>
-                <%= radio_button_tag 'delivery', "7", checked = "7" == @delivery %> Up to 7 days <br>
-                <%= radio_button_tag 'delivery', "10", checked = "10" == @delivery %> Up to 10 days <br>
-                <%= radio_button_tag 'delivery', "15", checked = "15" == @delivery %> Up to 15 days <br>
-                <%= radio_button_tag 'delivery', "0", checked = "0" == @delivery %> Any
-                <hr/>
+                  <!-- Title Search -->
+                  <div class="field">
+                    <%= text_field_tag 'q', @q || '', class: 'input', placeholder: "Search by title"%>
+                  </div>
+                  <hr/>
 
-                <!-- Buttons -->
-                <div class="field m-t-20">
-                  <button  class="button is-danger is-fullwidth" type="submit"> Apply</button>
-                </div>
+                  <!-- Price Range -->
+                  <label class="label">Price Range</label>
+                  <div class="field has-addons">
+                    <p class="control">
+                      <a class="button is-static">$</a>
+                    </p>
+                    <p class="control">
+                      <%= number_field_tag 'min', @min || '', class: "input", placeholder: 'Min' %>
+                    </p>
+                  </div>
+                  <div class="field has-addons">
+                    <p class="control">
+                      <a class="button is-static">$</a>
+                    </p>
+                    <p class="control">
+                      <%= number_field_tag 'max', @max || '', class: "input", placeholder: 'Max' %>
+                    </p>
+                  </div>
+                  <hr/>
+
+                  <!-- Delivery Time -->
+                  <label class="label">Delivery Time</label>
+                  <%= radio_button_tag 'delivery', "1", checked = "1" == @delivery %> Up to 1 days <br>
+                  <%= radio_button_tag 'delivery', "3", checked = "3" == @delivery %> Up to 3 days <br>
+                  <%= radio_button_tag 'delivery', "7", checked = "7" == @delivery %> Up to 7 days <br>
+                  <%= radio_button_tag 'delivery', "10", checked = "10" == @delivery %> Up to 10 days <br>
+                  <%= radio_button_tag 'delivery', "15", checked = "15" == @delivery %> Up to 15 days <br>
+                  <%= radio_button_tag 'delivery', "0", checked = "0" == @delivery %> Any
+                  <hr/>
+
+                  <!-- Buttons -->
+                  <div class="field m-t-20">
+                    <button  class="button is-danger is-fullwidth" type="submit"> Apply</button>
+                  </div>
+
+                <% end %>
+                <!-- END FORM TAG -->
 
                 <div class="field m-t-10">
-                  <button  class="button is-black is-outlined is-fullwidth" type="submit"> Clear All Filters</button>
+                  <%= form_tag '', method: :get do %>
+                    <button  class="button is-black is-outlined is-fullwidth" type="submit"> Clear All Filters</button>
+                  <% end %>
                 </div>
 
               </div>

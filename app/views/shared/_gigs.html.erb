@@ -24,12 +24,16 @@
                     </span>
       </div>
 
-      <% pricing = basic_pricing gig %>
       <footer class="card-footer">
-        <a class="has-text-danger is-block card-footer-item has-text-right">
+        <a class="card-footer-item">
+          <figure class="image is-32x32">
+            <%= image_tag avatar_url(gig.user), class: 'is-rounded' %>
+          </figure>
+        </a>
 
+        <a class="has-text-danger is-block card-footer-item has-text-right">
           <span class="small-title">STARTING AT</span>
-          <strong>$<%= pricing.price %></strong>
+          <strong>$<%= gig.price %></strong>
         </a>
       </footer>
 
