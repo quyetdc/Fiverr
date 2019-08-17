@@ -65,7 +65,7 @@
   </div>
 </nav>
 
-<% if current_user && !current_page?(search_path) %>
+<% if current_user && !current_page?(search_path) && !current_page?(root_path) %>
   <nav class="navbar has-shadow" style="z-index: 5;">
     <div class="container">
       <div class="navbar-menu">

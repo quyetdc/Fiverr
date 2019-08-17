@@ -10,6 +10,7 @@ class PagesController < ApplicationController
 
     query_condition = []
     query_condition[0] = "gigs.active = true"
+    query_condition[0] += " AND ( (gigs.has_single_pricing = true AND pricings.pricing_type = 0) OR (gigs.has_single_pricing = false) )"
 
     @q = params[:q]
     @min = params[:min]
@@ -44,10 +45,11 @@ class PagesController < ApplicationController
     end
 
     @gigs = Gig
-              .select('gigs.id, gigs.title, gigs.user_id, pricings.price AS price')
+              .select('gigs.id, gigs.title, gigs.user_id, MIN(pricings.price) AS price')
               .joins(:pricings)
               .where(query_condition)
               .order(@sort)
+              .group("gigs.id")
               .page(params[:page])
               .per(6)
   end

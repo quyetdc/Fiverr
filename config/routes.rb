@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   get 'pages/home'
 
-  root to: "users#dashboard"
+  root to: "pages#home"
 
   resources :gigs do
     member do
