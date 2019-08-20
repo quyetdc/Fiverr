@@ -1,5 +1,4 @@
-
-$(document).on('turbolinks: load', () => {
+document.addEventListener("turbolinks:load", function() {
   $('.toggle').on("click", (e) => {
 
     console.log('Toggle class clicked');
