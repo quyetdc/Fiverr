@@ -45,7 +45,7 @@
       <% if user_signed_in? %>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            <figure class="image is-24x24">
+            <figure class="image is-24x24 avatar <%= current_user.status ? 'online' : 'offline' %>">
               <%= image_tag avatar_url(current_user), class: "is-rounded" %>
             </figure>
             &nbsp;<%= current_user.full_name %>

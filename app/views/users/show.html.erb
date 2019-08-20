@@ -108,6 +108,24 @@
                   </div>
                 </article>
 
+
+                <!-- Mobile Number -->
+                <article class="media">
+                  <div class="content">
+                    <p>
+                      <strong>Mobile Number</strong>
+                    </p>
+
+                    <p>
+                      <% if @user.phone %>
+                        <span class="has-text-success">Mobile # verified</span>
+                      <% else %>
+                        <span class="has-text-danger">Mobile # unverified</span>
+                      <% end %>
+                    </p>
+                  </div>
+                </article>
+
               </div>
             </div>
           </div>
