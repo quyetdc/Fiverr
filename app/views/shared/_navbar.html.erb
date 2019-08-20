@@ -17,15 +17,20 @@
       <div class="navbar-start">
         <div class="navbar-item">
 
-          <div class="field has-addons">
-            <div class="control">
-              <input class="input" type="text" placeholder="Find services">
-            </div>
-            <div class="control">
-              <a class="button is-danger">
-                Search
-              </a>
-            </div>
+          <div class="<%= 'is-hidden' if current_page?(root_path) %>">
+            <%= form_tag search_path, method: :get, class: "field has-addons" do %>
+              <div class="control has-icons-left">
+            <span class="icon is-small is-left">
+              <i class="fa fa-search"></i>
+            </span>
+                <%= text_field_tag 'q', nil, class: 'input', placeholder: "Try 'logo design'" %>
+              </div>
+              <div class="control">
+                <button class="button is-danger" type="submit">
+                  Search
+                </button>
+              </div>
+            <% end %>
           </div>
 
         </div>
@@ -34,6 +39,7 @@
 
     <div class="navbar-end">
       <%= link_to "Post Gig", new_gig_path, class: 'navbar-item' %>
+      <%= link_to "Browse Gigs", search_path, class: 'navbar-item' %>
       <a href="#" class="navbar-item">Browse Gigs</a>
 
       <% if user_signed_in? %>

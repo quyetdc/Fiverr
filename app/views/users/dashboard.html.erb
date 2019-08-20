@@ -1,3 +1,8 @@
+
+<!-- HTTPS required. HTTP will give a 403 forbidden response -->
+<script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+
+
 <section class="section">
   <div class="container">
     <div class="columns">
@@ -175,6 +180,33 @@
                   </div>
                 </article>
 
+                <!-- Mobile number -->
+                <article>
+                  <div class="media">
+                    <div class="media-content">
+                      <p>
+                        <strong>Mobile Number</strong>
+                      </p>
+                      <br/>
+                      <%= current_user.hidden_phone%>
+                    </div>
+
+                    <div class="media-right">
+                      <i class="toggle fa fa-edit" aria-controls="user-phone"></i>
+                    </div>
+                  </div>
+
+                  <div class="content">
+                    <%= form_for :user, url: users_edit_url(current_user), action: :update, method: :post, html: {id: 'user-phone', class: 'is-hidden'} do |f| %>
+                      <div class="field">
+                        <%= f.text_field :phone, autofocus: true, autocomplete: 'form', class: 'input', id: "phone_number" %>
+                      </div>
+
+                      <a class="toggle button is-light" aria-controls="user-phone">Cancel</a>
+                      <%= link_to "Add & Verify", "javascript:verifyPhone()", class: "button is-danger" %>
+                    <% end %>
+                  </div>
+                </article>
               </div>
             </div>
           </div>
@@ -255,3 +287,78 @@
     </div>
   </div>
 </section>
+
+
+
+
+<!-- HTTPS required. HTTP will give a 403 forbidden response -->
+<script src="https://sdk.accountkit.com/en_US/sdk.js"></script>
+
+<script>
+  // initialize Account Kit with CSRF protection
+  AccountKit_OnInteractive = function(){
+    AccountKit.init(
+      {
+        appId:"<%= Rails.application.credentials.facebook_api %>",
+        state:"freelancer",
+        version:"v1.1",
+        debug: true
+      }
+    );
+  };
+
+  // login callback
+  function loginCallback(response) {
+    if (response.status === "PARTIALLY_AUTHENTICATED") {
+      var code = response.code;
+      $.ajax({
+        type: "POST",
+        url: "/users/edit_phone",
+        data: { code: code },
+        success: (data) => {
+          if (data.success) {
+            showNotification('success', 'Update phone number successfully');
+            location.reload()
+          } else {
+            showNotification('error', 'Invalid phone number');
+          }
+        },
+        error: (data) => {
+          showNotification('error', 'Invalid phone number');
+        }
+      });
+
+      // Send code to server to exchange for access token
+    }
+    else if (response.status === "NOT_AUTHENTICATED") {
+      // handle authentication failure
+      showNotification('error', 'Not Authenticate');
+    }
+    else if (response.status === "BAD_PARAMS") {
+      // handle bad parameters
+      showNotification('error', 'Not Authenticate');
+    }
+  }
+
+  // phone form submission handler
+  function verifyPhone() {
+    var phoneNumber = document.getElementById("phone_number").value;
+    AccountKit.login(
+      'PHONE',
+      {phoneNumber: phoneNumber}, // will use default values if not specified
+      loginCallback
+    );
+  }
+
+  function showNotification(type, message) {
+    new Noty({
+      type: type,
+      layout: "topRight",
+      timeout: 2000,
+      theme: 'sunset',
+      text: message
+    })
+  }
+
+</script>
+
