@@ -52,6 +52,36 @@ class UsersController < ApplicationController
     return render json: { success: false }
   end
 
+  def update_payment
+    unless current_user.stripe_id
+      customer = Stripe::Customer.create(
+        email: current_user.email,
+        source: params[:stripeToken]
+      )
+    else
+      customer = Stripe::Customer.update(
+        current_user.stripe_id,
+        source: params[:stripeToken]
+      )
+    end
+
+    if current_user.update(
+      stripe_id: customer.id,
+      stripe_last_4: customer.sources.data.first['last4']
+    )
+
+      flash[:notice] = "New card is saved"
+    else
+      flash[:alert] = "Invalid card"
+    end
+
+    redirect_to request.referrer
+
+  rescue Stripe::CardError => e
+    flash[:alert] = e.message
+    redirect_to request.referrer
+  end
+
   private
 
   def current_user_params

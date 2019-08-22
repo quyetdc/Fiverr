@@ -22,8 +22,8 @@ Rails.application.routes.draw do
   put '/offers/:id/reject', to: 'offers#reject', as: :reject_offer
 
   post '/reviews', to: 'reviews#create'
-
   post 'users/edit_phone', to: 'users#callback_phone'
+  post '/settings/payment', to: 'users#update_payment', as: 'update_payment'
 
   devise_for :users,
              path: '',

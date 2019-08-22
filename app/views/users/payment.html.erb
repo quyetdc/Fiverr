@@ -37,9 +37,17 @@
     <div class="columns is-centered">
       <div class="column is-8-tablet is-6-desktop is-6-widescreen">
         <p class="title has-text-centered">Payment Method</p>
+        <% if current_user.stripe_last_4 %>
+          <div class="card">
+            <div class="card-header-title is-centered">
+              <%= "Your current card: **** **** **** #{current_user.stripe_last_4}" %>
+            </div>
+          </div>
+        <% end %>
 
-
-        <form action="/charge" method="post" id="payment-form" class="has-text-centered">
+        <!-- Form with can be use with model object as form_for, but can be use without model object as form_tag -->
+        <!-- This case we use form_with with url. By default, it has data-remote, and we specify local: true to disable ajax call -->
+        <%= form_with url: update_payment_path, local: true, id: "payment-form" do |f| %>
           <div class="card form-row">
             <div id="card-element">
               <!-- A Stripe Element will be inserted here. -->
@@ -49,8 +57,9 @@
             <div id="card-errors" role="alert"></div>
           </div>
 
-          <button class="button is-primary is-center is-fullwidth m-t-30">Submit Payment</button>
-        </form>
+          <%= f.submit "#{current_user.stripe_id ? 'Update Card' : 'Add Card' }",
+                       class: "button is-primary is-center is-fullwidth m-t-30" %>
+        <% end %>
 
       </div>
     </div>
