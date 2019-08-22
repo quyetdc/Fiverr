@@ -31,6 +31,8 @@ gem 'faker', '=1.9.3'
 
 gem 'kaminari'
 
+gem 'stripe', '=4.18.1'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
