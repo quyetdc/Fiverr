@@ -68,7 +68,7 @@
 
 <script>
   // Create a Stripe client.
-  var stripe = Stripe('<%= Rails.application.credentials.stripe_public_key %>');
+  var stripe = Stripe('<%= Rails.application.credentials[Rails.env.to_sym][:stripe][:public_key] %>');
 
   // Create an instance of Elements.
   var elements = stripe.elements();
