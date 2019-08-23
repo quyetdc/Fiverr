@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
       flash[:alert] = "Price is incorrect"
     end
 
-    redirect_to request.referrer
+    redirect_to buying_orders_path
   end
 
   def selling_orders
