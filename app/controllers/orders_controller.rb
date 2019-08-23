@@ -6,12 +6,14 @@ class OrdersController < ApplicationController
     pricing = gig.pricings.find_by(pricing_type: params[:pricing_type])
 
     if (pricing && !gig.has_single_pricing) || (pricing && pricing.basic? && gig.has_single_pricing)
-      charge(gig, pricing)
+      if charge(gig, pricing)
+        return redirect_to buying_orders_path
+      end
     else
       flash[:alert] = "Price is incorrect"
     end
 
-    redirect_to buying_orders_path
+    return redirect_to request.referrer
   end
 
   def selling_orders
@@ -48,12 +50,81 @@ class OrdersController < ApplicationController
     order.buyer_name = current_user.full_name
     order.buyer_id = current_user.id
 
-    order.amount = pricing.price
+    amount = pricing.price * 1.1
 
-    if order.save
-      flash[:notice] = "Your order created successfully"
+    order.amount = amount
+
+    if params[:payment].blank?
+      flash[:alert] = "No payment selected"
+      return false
+    elsif params[:payment] == "system"
+      if amount > current_user.wallet
+        flash[:alert] = "Not enough money"
+        return false
+      else
+        # We need to rollback transactions if there's any fail transaction
+        ActiveRecord::Base.transaction do
+
+          # return error so ActionRecor transaction will rollback every transaction here
+          # Without !, the active record query return false only instead of raising error
+
+          current_user.update!(wallet: current_user.wallet - amount)
+
+          gig.user.update!(wallet: gig.user.wallet + pricing.price)
+
+          Transaction.create!(
+            status: Transaction.statuses[:approved],
+            transaction_type: Transaction.transaction_types[:trans],
+            source_type: Transaction.source_types[:system],
+            buyer: current_user,
+            seller: gig.user,
+            amount: amount,
+            gig: gig
+          )
+
+          order.save
+        end
+
+        flash[:notice] = "Your order is created successfully"
+        return true
+      end
     else
-      flash[:alert] = order.errors.full_messages.join(', ')
+      charge = Stripe::Charge.create(
+        amount: (amount * 100).to_i, # to cents
+        currency: 'usd',
+        customer: current_user.stripe_id,
+        source: params[:payment]
+      )
+
+      if charge.paid
+        # We need to rollback transactions if there's any fail transaction
+        ActiveRecord::Base.transaction do
+          gig.user.update!(wallet: gig.user.wallet + pricing.price)
+
+          # return error so ActionRecor transaction will rollback every transaction here
+          # Without !, the active record query return false only instead of raising error
+          Transaction.create!(
+            status: Transaction.statuses[:approved],
+            transaction_type: Transaction.transaction_types[:trans],
+            source_type: Transaction.source_types[:stripe],
+            buyer: current_user,
+            seller: gig.user,
+            amount: amount,
+            gig: gig
+          )
+
+          order.save
+        end
+
+        flash[:notice] = "Your order is created successfully"
+        return true
+      end
+
+      flash[:alert] = "Invalid card"
+      return false
     end
+  rescue ActiveRecord::RecordInvalid # Raised when transaction fails
+    flash[:alert] = "Something went wrong"
+    return false
   end
 end
