@@ -92,6 +92,41 @@ class UsersController < ApplicationController
     redirect_to request.referrer
   end
 
+  def earnings
+    @net_income = (Transaction.where("seller_id = ?", current_user.id).sum(:amount) / 1.1).round(2)
+
+    @with_drawn = Transaction.where(
+      'buyer_id = ? AND status = ? AND transaction_type = ?',
+      current_user.id,
+      Transaction.statuses[:approved],
+      Transaction.transaction_types[:withdraw]
+    ).sum(:amount)
+
+    @pending = Transaction.where(
+      'buyer_id = ? AND status = ? AND transaction_type = ?',
+      current_user.id,
+      Transaction.statuses[:pending],
+      Transaction.transaction_types[:withdraw]
+    ).sum(:amount)
+
+    @purchased = Transaction.where(
+      'buyer_id = ? AND source_type = ? AND transaction_type = ?',
+      current_user.id,
+      Transaction.source_types[:system],
+      Transaction.transaction_types[:trans]
+    ).sum(:amount)
+
+    @withdrawable = current_user.wallet
+
+    @transactions = Transaction.where(
+      "seller_id = ? OR (buyer_id = ? AND source_type = ?)",
+      current_user.id,
+      current_user.id,
+      Transaction.source_types[:system]
+    ).page(params[:page])
+
+  end
+
   private
 
   def current_user_params
