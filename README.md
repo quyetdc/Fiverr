@@ -45,6 +45,10 @@ We use `omniauth` & `omniauth-facebook` for Facebook integration. We will need t
 - We use `Stripe` to handle user payment method. The test credit card is `4242 4242 4242 4242`
 - You can look at this [commit](https://github.com/quyetdc/Fiverr/commit/fef55596be97e1ba208d0f8e0e601ec7c4b9db41) and [commit](https://github.com/quyetdc/Fiverr/commit/3877194a33489b643ee6c32c33b9da9f63aab929)
 
+### Admin
+
+The project uses Trestle for Admin management
+
 ## Troubleshooting
 
 #### Heroku
