@@ -39,6 +39,8 @@ gem 'trestle-search', '=0.3.0'
 
 gem 'trestle-tinymce', '=0.1.3'
 
+gem 'activemerchant', '=1.95.0'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-byebug'
