@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'messages/create'
   get 'dashboard', to: "users#dashboard" #, as: :dashboard
   get '/users/:id', to: "users#show", as: :user
 
@@ -31,6 +32,8 @@ Rails.application.routes.draw do
   post '/settings/payment', to: 'users#update_payment', as: 'update_payment'
   post '/settings/payout', to: 'users#update_payout', as: 'update_payout'
   post '/users/withdraw', to: "users#withdraw", as: 'withdraw'
+
+  post 'messages', to: "messages#create"
 
   devise_for :users,
              path: '',
