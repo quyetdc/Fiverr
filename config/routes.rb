@@ -20,6 +20,9 @@ Rails.application.routes.draw do
 
   get '/earnings', to: "users#earnings", as: 'earnings'
 
+  get '/conversations', to: "conversations#list", as: "conversations"
+  get '/conversations/:client_id', to: "conversations#show", as: "conversation_detail"
+
   post "users/edit", to: "users#update"
   put '/orders/:id/complete',  to: "orders#complete", as: 'complete_order'
 
