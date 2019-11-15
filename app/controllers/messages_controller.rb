@@ -25,6 +25,20 @@ class MessagesController < ApplicationController
     )
 
     if @message.save
+      conversation.update!(updated_at: @message.created_at)
+      receiver = conversation.sender.id == current_user.id ?
+                   conversation.receiver :
+                   conversation.sender
+
+      MessageChannel.broadcast_to conversation,
+                                  sender_id: current_user.id,
+                                  sender: render_message(@message, current_user),
+                                  receiver: render_message(@message, receiver)
+
+      if URI(request.referrer).path == conversation_detail_path(id: receiver.id)
+        return render json: { success: true }
+      end
+
       redirect_to request.referrer, notice: "Message sent..."
     else
       redirect_to request.referrer, notice: "Cannot send the message..."
@@ -33,6 +47,11 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def render_message(message, user)
+    self.render_to_string partial: 'conversations/message',
+                          locals: { m: message, user: user }
+  end
 
   def message_params
     params.require(:message).permit(:content, :receiver_id)

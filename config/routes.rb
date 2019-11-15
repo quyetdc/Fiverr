@@ -47,6 +47,8 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
 
+  mount ActionCable.server => "/cable"
+
   resources :gigs do
     member do
       delete :delete_photo
