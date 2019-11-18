@@ -39,6 +39,8 @@
 
           </td>
           <td>
+            <%= link_to "View", order_detail_path(order), class: "button is-small is-outlined" %>
+
             <% if order.completed? %>
               <a href="" class="button is-small is-outlined is-danger toggle-modal" aria-control="<%= order.id %>">
                 Rating

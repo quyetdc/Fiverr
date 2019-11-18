@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   get '/selling_orders', to: "orders#selling_orders"
   get '/buying_orders', to: "orders#buying_orders"
+  get '/orders/:id', to: "orders#show", as: "order_detail"
 
   get '/all-requests', to: "requests#list"
   get 'request_offers/:id', to: "requests#offers", as: 'request_offers'
@@ -37,6 +38,8 @@ Rails.application.routes.draw do
   post '/users/withdraw', to: "users#withdraw", as: 'withdraw'
 
   post 'messages', to: "messages#create"
+
+  post 'comments', to: "comments#create"
 
   devise_for :users,
              path: '',

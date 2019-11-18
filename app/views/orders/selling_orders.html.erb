@@ -36,6 +36,8 @@
                 <%= order.status.capitalize %>
               </span>
 
+              <%= link_to "View", order_detail_path(order), class: "button is-small is-outlined" %>
+
           </td>
         </tr>
       <% end %>
